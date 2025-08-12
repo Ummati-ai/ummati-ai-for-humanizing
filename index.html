@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ummati - AI Text Humanizer & Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #0a0a1a;
+            color: #e0e0e0;
+        }
+        .cyber-bg {
+            background-color: #1a1a2e;
+            border: 1px solid #4a4a6a;
+            box-shadow: 0 0 15px rgba(74, 144, 226, 0.2);
+        }
+        .cyber-textarea {
+            background-color: #0f0f20;
+            border: 1px solid #4a4a6a;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .cyber-textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+        }
+        .cyber-btn {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            border: 1px solid #3b82f6;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), inset 0 0 5px rgba(59, 130, 246, 0.3);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        .cyber-btn:hover {
+            background-color: #2563eb;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), inset 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+        .cyber-btn-secondary {
+            background-color: #3e3e5a;
+            color: #c0c0e0;
+            border: 1px solid #6a6a8a;
+            transition: all 0.3s ease;
+        }
+        .cyber-btn-secondary:hover {
+            background-color: #4a4a6a;
+            border-color: #8a8aac;
+        }
+        .cyber-radio-label {
+            border: 1px solid #4a4a6a;
+            transition: all 0.3s ease;
+        }
+        .cyber-radio:checked + .cyber-radio-label {
+            background-color: #2563eb;
+            border-color: #3b82f6;
+            color: white;
+        }
+        #ai-gauge-circle {
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+        .loader {
+            border: 4px solid #4a4a6a;
+            border-top: 4px solid #4a90e2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .text-glow {
+            text-shadow: 0 0 8px #4a90e2, 0 0 10px #4a90e2;
+        }
+        .feature-card {
+            background: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid #4a4a6a;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+            border-color: #4a90e2;
+        }
+    </style>
+</head>
+<body class="w-full">
+
+    <!-- Header / Navbar -->
+    <header class="cyber-bg sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-glow">Ummati</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#features" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                        <a href="#tool" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">The Tool</a>
+                        <a href="#getapp" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Get the App</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 sm:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight">
+                    <span class="text-glow">Humanize Your AI Content</span> Instantly.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-blue-200">
+                    Ummati transforms robotic AI text into natural, human-like writing. Bypass AI detectors, enhance readability, and tailor your content's tone with our advanced rewriting engine.
+                </p>
+                <div class="mt-8">
+                    <a href="#tool" class="cyber-btn px-8 py-4 rounded-md text-lg font-bold">Try Ummati Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-black bg-opacity-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-white">Powerful Features at Your Fingertips</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-blue-200">
+                        Everything you need to refine and analyze your text.
+                    </p>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="feature-card rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-white">Advanced Humanization</h3>
+                        <p class="mt-2 text-gray-300">Choose from multiple styles and modes—from casual to academic—to perfectly match your desired voice and make content undetectable.</p>
+                    </div>
+                    <div class="feature-card rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-white">AI Detection</h3>
+                        <p class="mt-2 text-gray-300">Get an instant percentage score on how likely your text is to be flagged as AI, with a clear breakdown of the analysis.</p>
+                    </div>
+                    <div class="feature-card rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-white">Complexity Control</h3>
+                        <p class="mt-2 text-gray-300">Effortlessly simplify complex text for broader audiences or increase sophistication for a more expert tone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Tool Section -->
+        <section id="tool" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-wider text-glow">
+                        Ummati Enhancement Suite
+                    </h2>
+                    <p class="text-lg text-blue-300 mt-2">Paste your text below to begin.</p>
+                </header>
+
+                <!-- Embedded Tool -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Left Panel: Input & Controls -->
+                    <div class="flex flex-col gap-6">
+                        <div class="cyber-bg rounded-lg p-6 flex-grow flex flex-col">
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="inputText" class="text-xl font-semibold text-blue-300">Input Text</label>
+                                <span id="charCount" class="text-sm text-gray-400">0/5000 Characters</span>
+                            </div>
+                            <textarea id="inputText" placeholder="Paste your AI-generated text here..." class="cyber-textarea w-full h-64 md:h-80 rounded-md p-3 text-base resize-none flex-grow"></textarea>
+                        </div>
+                        <div class="cyber-bg rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-blue-300 mb-4">Processing Options</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-lg font-medium text-gray-300">Rewrite Style</span>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <input type="radio" name="humanize_style" id="style_improve" value="Improve Readability" class="hidden cyber-radio" checked>
+                                        <label for="style_improve" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Readability</label>
+                                        <input type="radio" name="humanize_style" id="style_casual" value="More Casual" class="hidden cyber-radio">
+                                        <label for="style_casual" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Casual</label>
+                                        <input type="radio" name="humanize_style" id="style_formal" value="More Formal" class="hidden cyber-radio">
+                                        <label for="style_formal" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Formal</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-lg font-medium text-gray-300">Rewrite Mode</span>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <input type="radio" name="rewrite_mode" id="mode_standard" value="Standard" class="hidden cyber-radio" checked>
+                                        <label for="mode_standard" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Standard</label>
+                                        <input type="radio" name="rewrite_mode" id="mode_persuasive" value="Persuasive" class="hidden cyber-radio">
+                                        <label for="mode_persuasive" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Persuasive</label>
+                                        <input type="radio" name="rewrite_mode" id="mode_creative" value="Creative" class="hidden cyber-radio">
+                                        <label for="mode_creative" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Creative</label>
+                                        <input type="radio" name="rewrite_mode" id="mode_academic" value="Academic" class="hidden cyber-radio">
+                                        <label for="mode_academic" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Academic</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="text-lg font-medium text-gray-300">Complexity</span>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <input type="radio" name="rewrite_complexity" id="complexity_original" value="Original" class="hidden cyber-radio" checked>
+                                        <label for="complexity_original" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Original</label>
+                                        <input type="radio" name="rewrite_complexity" id="complexity_simplify" value="Simplify" class="hidden cyber-radio">
+                                        <label for="complexity_simplify" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Simplify</label>
+                                        <input type="radio" name="rewrite_complexity" id="complexity_sophisticated" value="Make More Sophisticated" class="hidden cyber-radio">
+                                        <label for="complexity_sophisticated" class="cyber-radio-label px-3 py-1.5 rounded-md cursor-pointer text-sm sm:text-base">Sophisticated</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                                <button id="humanizeBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">Humanize Text</button>
+                                <button id="detectBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">Detect AI</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right Panel: Output -->
+                    <div id="outputPanel" class="cyber-bg rounded-lg p-6 flex flex-col min-h-[400px]">
+                        <div id="initialState" class="m-auto text-center text-gray-400">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-blue-400"><path d="M12 20h.01"/><path d="M12 4h.01"/><path d="M4 12h.01"/><path d="M20 12h.01"/><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M12 12h.01"/></svg>
+                            <h3 class="text-2xl font-semibold text-gray-300">Your results will appear here</h3>
+                        </div>
+                        <div id="loadingState" class="hidden m-auto text-center">
+                            <div class="loader mx-auto"></div><p class="mt-4 text-lg text-blue-300 animate-pulse">Analyzing patterns...</p>
+                        </div>
+                        <div id="humanizeResult" class="hidden flex-grow flex flex-col">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-semibold text-blue-300">Humanized Output</h3>
+                                <button id="copyBtn" class="cyber-btn-secondary px-3 py-1 rounded-md text-sm flex items-center gap-1">Copy</button>
+                            </div>
+                            <div id="outputText" class="cyber-textarea w-full flex-grow rounded-md p-3 text-base overflow-y-auto"></div>
+                        </div>
+                        <div id="detectResult" class="hidden flex-grow flex flex-col items-center justify-center text-center">
+                            <h3 class="text-xl font-semibold text-blue-300 mb-4">AI Detection Analysis</h3>
+                            <div class="relative w-48 h-48">
+                                <svg class="w-full h-full" viewBox="0 0 100 100">
+                                    <circle class="text-gray-600" stroke-width="10" cx="50" cy="50" r="40" fill="transparent"></circle>
+                                    <circle id="ai-gauge-circle" class="text-blue-500" stroke-width="10" cx="50" cy="50" r="40" fill="transparent" stroke-linecap="round" transform="rotate(-90 50 50)" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+                                    <text id="ai-score-text" x="50" y="50" class="font-bold text-3xl" text-anchor="middle" alignment-baseline="middle" fill="#e0e0e0">0%</text>
+                                </svg>
+                            </div>
+                            <p class="mt-4 text-lg font-bold text-white">Likely AI-Generated</p>
+                            <div id="aiReasoning" class="mt-4 text-left text-gray-300 bg-gray-900/50 p-4 rounded-lg max-w-md w-full">
+                                <h4 class="font-semibold mb-2 text-blue-300">Analysis Breakdown:</h4>
+                                <p id="reasoningText" class="text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Get the App Section -->
+        <section id="getapp" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center cyber-bg rounded-lg p-10">
+                 <h2 class="text-3xl font-extrabold text-white">Get Ummati On Your Favorite Device</h2>
+                 <p class="mt-4 max-w-2xl mx-auto text-lg text-blue-200">
+                    Use Ummati on the go with our dedicated apps for mobile and desktop.
+                 </p>
+                 <div class="mt-8 flex justify-center items-center gap-4">
+                    <a href="#" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">App Store (Soon)</a>
+                    <a href="#" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">Google Play (Soon)</a>
+                    <a href="#" class="bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">Windows Store (Soon)</a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p>&copy; 2024 Ummati. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // All the JavaScript from the previous version is included here.
+        // It will control the tool embedded in the #tool section.
+        const inputText = document.getElementById('inputText');
+        const charCount = document.getElementById('charCount');
+        const humanizeBtn = document.getElementById('humanizeBtn');
+        const detectBtn = document.getElementById('detectBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        
+        const outputPanel = document.getElementById('outputPanel');
+        const initialState = document.getElementById('initialState');
+        const loadingState = document.getElementById('loadingState');
+        const humanizeResult = document.getElementById('humanizeResult');
+        const detectResult = document.getElementById('detectResult');
+        const outputText = document.getElementById('outputText');
+        
+        const aiGaugeCircle = document.getElementById('ai-gauge-circle');
+        const aiScoreText = document.getElementById('ai-score-text');
+        const reasoningText = document.getElementById('reasoningText');
+
+        const MAX_CHARS = 5000;
+
+        inputText.addEventListener('input', () => {
+            const count = inputText.value.length;
+            charCount.textContent = `${count}/${MAX_CHARS} Characters`;
+            if (count > MAX_CHARS) {
+                charCount.classList.add('text-red-500');
+            } else {
+                charCount.classList.remove('text-red-500');
+            }
+        });
+
+        humanizeBtn.addEventListener('click', handleHumanize);
+        detectBtn.addEventListener('click', handleDetect);
+        copyBtn.addEventListener('click', handleCopy);
+
+        function showLoading() {
+            initialState.classList.add('hidden');
+            humanizeResult.classList.add('hidden');
+            detectResult.classList.add('hidden');
+            loadingState.classList.remove('hidden');
+        }
+
+        function showHumanizeResult(text) {
+            loadingState.classList.add('hidden');
+            outputText.innerHTML = text.replace(/\n/g, '<br>');
+            humanizeResult.classList.remove('hidden');
+        }
+
+        function showDetectResult(score, reasoning) {
+            loadingState.classList.add('hidden');
+            const circumference = 2 * Math.PI * 40;
+            const offset = circumference - (score / 100) * circumference;
+            aiGaugeCircle.style.strokeDashoffset = offset;
+            let currentScore = 0;
+            const interval = setInterval(() => {
+                if (currentScore >= score) {
+                    clearInterval(interval);
+                    aiScoreText.textContent = `${score}%`;
+                } else {
+                    currentScore++;
+                    aiScoreText.textContent = `${currentScore}%`;
+                }
+            }, 10);
+            reasoningText.textContent = reasoning;
+            detectResult.classList.remove('hidden');
+        }
+        
+        function showError(message) {
+            loadingState.classList.add('hidden');
+            initialState.classList.remove('hidden');
+            alert(`Error: ${message}`); 
+        }
+
+        async function handleHumanize() {
+            const text = inputText.value;
+            if (!text.trim()) {
+                alert("Please enter some text to humanize.");
+                return;
+            }
+            if (text.length > MAX_CHARS) {
+                alert(`Text exceeds the maximum character limit of ${MAX_CHARS}.`);
+                return;
+            }
+            const selectedStyle = document.querySelector('input[name="humanize_style"]:checked').value;
+            const selectedMode = document.querySelector('input[name="rewrite_mode"]:checked').value;
+            const selectedComplexity = document.querySelector('input[name="rewrite_complexity"]:checked').value;
+            showLoading();
+            const prompt = `You are an expert writer. Rewrite the following text based on these parameters:
+- Desired Style: "${selectedStyle}"
+- Desired Mode: "${selectedMode}"
+- Desired Complexity: "${selectedComplexity}"
+Focus on making the text sound natural and human-written. Vary sentence structure and vocabulary. Avoid jargon unless essential. Do not add any extra commentary, just provide the rewritten text.
+Original Text:
+---
+${text}
+---
+Rewritten Text:`;
+            try {
+                const resultText = await callGeminiAPI(prompt);
+                showHumanizeResult(resultText);
+            } catch (error) {
+                console.error("Humanize Error:", error);
+                showError("Failed to humanize text. Please try again.");
+            }
+        }
+
+        async function handleDetect() {
+            const text = inputText.value;
+            if (!text.trim()) {
+                alert("Please enter some text to analyze.");
+                return;
+            }
+             if (text.length > MAX_CHARS) {
+                alert(`Text exceeds the maximum character limit of ${MAX_CHARS}.`);
+                return;
+            }
+            showLoading();
+            const prompt = `Analyze the following text and estimate the probability that it was written by an AI. Provide your answer as a JSON object with two keys: "ai_score" (a number from 0 to 100 representing the percentage chance it's AI-written) and "reasoning" (a brief, 1-2 sentence explanation for your score, focusing on elements like sentence structure, vocabulary, and tone).
+Text to analyze:
+---
+${text}
+---`;
+            const schema = {
+                type: "OBJECT",
+                properties: { "ai_score": { "type": "NUMBER" }, "reasoning": { "type": "STRING" } },
+                required: ["ai_score", "reasoning"]
+            };
+            try {
+                const resultJson = await callGeminiAPI(prompt, schema);
+                const result = JSON.parse(resultJson);
+                showDetectResult(result.ai_score, result.reasoning);
+            } catch (error) {
+                console.error("Detect Error:", error);
+                showError("Failed to detect AI content. The model may have returned an unexpected format. Please try again.");
+            }
+        }
+        
+        function handleCopy() {
+            const textToCopy = outputText.innerText;
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+                alert('Failed to copy text.');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        async function callGeminiAPI(prompt, jsonSchema = null) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            let payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            if (jsonSchema) {
+                payload.generationConfig = { responseMimeType: "application/json", responseSchema: jsonSchema };
+            }
+            let response;
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else {
+                           throw new Error("Invalid response structure from API.");
+                        }
+                    } else if (response.status === 429 || response.status >= 500) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    } else {
+                        const errorBody = await response.text();
+                        throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorBody}`);
+                    }
+                } catch (error) {
+                    if (i === 4) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+             throw new Error("API request failed after multiple retries.");
+        }
+    </script>
+</body>
+</html>
