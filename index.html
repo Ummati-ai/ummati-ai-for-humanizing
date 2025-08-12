@@ -218,8 +218,14 @@
                                 </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-4 mt-6">
-                                <button id="humanizeBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">Humanize Text</button>
-                                <button id="detectBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">Detect AI</button>
+                                <button id="humanizeBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 1-4.24 18.24"/><path d="M12 2a10 10 0 0 0-4.24 18.24"/><path d="M12 12h.01"/><path d="M12 6h.01"/><path d="M12 18h.01"/><path d="m18 12-.88.88a4.95 4.95 0 0 1-7.07 0l-.88-.88"/><path d="m18 12-.88-.88a4.95 4.95 0 0 0-7.07 0l-.88.88"/></svg>
+                                    Humanize Text
+                                </button>
+                                <button id="detectBtn" class="cyber-btn w-full py-3 rounded-md text-lg font-bold flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                                    Detect AI
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -235,7 +241,10 @@
                         <div id="humanizeResult" class="hidden flex-grow flex flex-col">
                             <div class="flex justify-between items-center mb-2">
                                 <h3 class="text-xl font-semibold text-blue-300">Humanized Output</h3>
-                                <button id="copyBtn" class="cyber-btn-secondary px-3 py-1 rounded-md text-sm flex items-center gap-1">Copy</button>
+                                <button id="copyBtn" class="cyber-btn-secondary px-3 py-1 rounded-md text-sm flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    Copy
+                                </button>
                             </div>
                             <div id="outputText" class="cyber-textarea w-full flex-grow rounded-md p-3 text-base overflow-y-auto"></div>
                         </div>
@@ -430,8 +439,10 @@ ${text}
             textArea.select();
             try {
                 document.execCommand('copy');
-                copyBtn.textContent = 'Copied!';
-                setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+                copyBtn.innerHTML = 'Copied!';
+                setTimeout(() => { 
+                    copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy`; 
+                }, 2000);
             } catch (err) {
                 console.error('Fallback: Oops, unable to copy', err);
                 alert('Failed to copy text.');
